@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "NotQuiteTetris": {
+      "commandName": "Project",
+      "workingDirectory": "$(ProjectDir)"
+    }
+  }
+}
