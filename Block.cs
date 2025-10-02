@@ -47,6 +47,11 @@ public abstract class Block {
 
 
 
+	public bool HasCellAt(int x, int y) {
+		return Grid[x][y];
+	}
+
+
 	public void Rotate(bool v = false, int s = 0) {
 		Log.Me(() => "Rotating block...", v, s + 1);
 		bool[][] newGrid = new bool[Height][];
