@@ -1,4 +1,5 @@
-﻿using Raylib_cs;
+﻿using System.Numerics;
+using Raylib_cs;
 
 namespace NotQuiteTetris;
 
@@ -46,7 +47,6 @@ public abstract class Block {
 	}
 
 
-
 	public bool HasCellAt(int x, int y) {
 		return Grid[x][y];
 	}
@@ -75,9 +75,18 @@ public abstract class Block {
 	}
 
 
-
 	public void RotateTo(int targetRotation, bool v = false, int s = 0) {
 		if (targetRotation < 0 || targetRotation > 3) throw new ArgumentOutOfRangeException(nameof(targetRotation), "Target rotation must be between 0 and 3 (inclusive).");
 		while (Rotation != targetRotation) Rotate(v, s + 1);
+	}
+
+
+	public Vector2 GetCenterPosition(bool v = false, int s = 0) {
+		Log.Me(() => "Calculating center position...", v, s + 1);
+		float x = (Width - 1) / 2f;
+		float y = (Height - 1) / 2f;
+
+		Log.Me(() => "Done!", v, s + 1);
+		return new Vector2(x, y);
 	}
 }
