@@ -17,6 +17,14 @@ public static class GridRenderer {
 
 	public static int EndPosY => PosY + (CellSize + Spacing) * GridManager.Height - Spacing;
 
+	public static bool IsMouseInsideGrid {
+		get {
+			int x = Raylib.GetMouseX();
+			int y = Raylib.GetMouseY();
+			return x >= PosX && x <= EndPosX && y >= PosY && y <= EndPosY;
+		}
+	}
+
 	public static void Update(bool v = false, int s = 0) {
 		Log.Me(() => "Rendering grid...", v, s + 1);
 
