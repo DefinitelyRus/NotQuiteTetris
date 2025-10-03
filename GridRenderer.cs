@@ -51,6 +51,9 @@ public static class GridRenderer {
 			}
 		}
 
+
+		Log.Me(() => "Done!", v, s + 1);
+	}
 		Log.Me(() => "Done!", v, s + 1);
 	}
 }
