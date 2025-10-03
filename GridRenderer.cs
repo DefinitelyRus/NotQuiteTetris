@@ -12,6 +12,10 @@ public static class GridRenderer {
 	public static int Spacing => 2;
 
 	public static int CellSize => 50;
+	
+	public static int EndPosX => PosX + (CellSize + Spacing) * GridManager.Width - Spacing;
+
+	public static int EndPosY => PosY + (CellSize + Spacing) * GridManager.Height - Spacing;
 
 	public static void Update(bool v = false, int s = 0) {
 		Log.Me(() => "Rendering grid...", v, s + 1);
