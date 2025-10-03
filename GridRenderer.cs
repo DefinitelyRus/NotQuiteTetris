@@ -54,6 +54,28 @@ public static class GridRenderer {
 
 		Log.Me(() => "Done!", v, s + 1);
 	}
+
+	public static void PreviewBlock(Block block, int gridX, int gridY, bool v = false, int s = 0) {
+		Log.Me(() => $"Previewing block at ({gridX}, {gridY})...", v, s + 1);
+
+		// For each column...
+		for (int blockX = 0; blockX < block.Width; blockX++) {
+
+			// For each cell (row) in the column...
+			for (int blockY = 0; blockY < block.Height; blockY++) {
+				bool blockHasCell = block.HasCellAt(blockX, blockY);
+				bool gridHasCell = GridManager.GetCell(gridX + blockX, gridY + blockY, v, s + 1) != null;
+				int cellPosX = (gridX + blockX) * CellSize + PosX;
+				int cellPosY = (gridY + blockY) * CellSize + PosY;
+
+				if (blockHasCell) {
+					Color previewColor = gridHasCell ? Color.Red : Color.Green;
+					Raylib.DrawRectangle(cellPosX, cellPosY, CellSize, CellSize, previewColor);
+					Raylib.DrawRectangleLinesEx(new Rectangle(cellPosX, cellPosY, CellSize, CellSize), Padding, Color.Black);
+				}
+			}
+		}
+
 		Log.Me(() => "Done!", v, s + 1);
 	}
 }
