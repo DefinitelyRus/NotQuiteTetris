@@ -1,37 +1,42 @@
-﻿using System.Resources;
-using Raylib_cs;
+﻿using Raylib_cs;
+namespace NotQuiteTetris;
 
-namespace NotQuiteTetris
+public class Master
 {
-    public class Master
-    {
+    public const bool LogBasic = true;
 
-        public static bool LogBasic = true;
+    public const bool LogUpdate = true;
 
-        public static bool LogUpdate = true;
+	static void Main() {
+		Log.Me(() => "Starting game...", LogBasic);
+		Raylib.SetTraceLogLevel(TraceLogLevel.Warning);
+		Raylib.SetTargetFPS(120);
 
-		static void Main(string[] args) {
-			Log.Me(() => "Starting game...", LogBasic);
-			Raylib.SetTraceLogLevel(TraceLogLevel.Warning);
-			Raylib.InitWindow(1280, 720, "Not quite Tetris");
-			Raylib.InitAudioDevice();
-			Raylib.SetMasterVolume(0.6f);
-			Raylib.SetTargetFPS(60);
+		Log.Me(() => "Doing initial setup...", LogBasic);
+		ResourceManager.Initialize(LogBasic);
+		GameRenderer.Initialize(LogBasic);
+		GameManager.InitializeHand(LogBasic);
 
-			Log.Me(() => "Entering main game loop...", LogBasic);
-			while (!Raylib.WindowShouldClose()) {
-				Log.Me(() => "Updating game state...", LogUpdate);
-				Raylib.BeginDrawing();
-				Raylib.ClearBackground(Color.RayWhite);
+		Log.Me(() => "Loading game from file...", LogBasic);
+		GameManager.LoadGameProgress(LogBasic);
 
-				GridRenderer.Update(LogUpdate);
+		Log.Me(() => "Entering main game loop...", LogBasic);
+		while (!Raylib.WindowShouldClose()) {
+			Log.Me(() => "Updating game state...", LogUpdate);
+			Raylib.BeginDrawing();
+			Raylib.ClearBackground(Color.RayWhite);
 
-				Raylib.EndDrawing();
-				Log.Me(() => "Frame complete.\n", LogUpdate);
-			}
+			InputManager.Update(LogUpdate);
+			GameRenderer.Update(LogUpdate);
 
-			Log.Me(() => "Exiting game...", LogBasic);
-			Raylib.CloseWindow();
+			ResourceManager.PlayMusic(LogUpdate);
+
+			Log.Me(() => "Frame complete.\n", LogUpdate);
 		}
-    }
+		Log.Me(() => "Exited main game loop. Saving game...", LogBasic);
+		GameManager.SaveGameProgress(LogBasic);
+
+		Log.Me(() => "Exiting game...", LogBasic);
+		Raylib.CloseWindow();
+	}
 }
