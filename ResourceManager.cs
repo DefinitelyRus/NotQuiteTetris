@@ -88,6 +88,7 @@ internal static class ResourceManager {
 
 	public static void PlayMusic(bool v = false, int s = 0) {
 		Raylib.UpdateMusicStream(MusicStream);
+
 		if (Raylib.IsMusicStreamPlaying(MusicStream)) return;
 
 		Log.Me(() => "Finding background music to play...", v, s + 1);
@@ -95,6 +96,7 @@ internal static class ResourceManager {
 		string filePath = $"Assets\\Audio\\music{musicIndex}.wav";
 		string fileName = Path.GetFileNameWithoutExtension(filePath);
 		MusicStream = Raylib.LoadMusicStream(filePath);
+		MusicStream.Looping = false;
 
 		Raylib.PlayMusicStream(MusicStream);
 		Log.Me(() => $"Now playing: {fileName}.", v, s + 1);
