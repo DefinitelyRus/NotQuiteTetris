@@ -11,4 +11,9 @@
     <PackageReference Include="Raylib-cs" Version="7.0.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Assets\Audio\" />
+    <Folder Include="Assets\Sprites\" />
+  </ItemGroup>
+
 </Project>
