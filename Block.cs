@@ -6,11 +6,11 @@ namespace NotQuiteTetris;
 public abstract class Block {
 	public int Width { get; private set; }
 
-	public int Height { get; private set; }
+	public int Height { get; private set; } = -1;
 
 	public Color Color { get; private set; }
 
-	protected bool[][] Grid { get; set; }
+	public bool[][] Grid { get; protected set; }
 
 	public int Rotation { get; private set; } = 0; //0 = 0, 1 = 90, 2 = 180, 3 = 270
 
@@ -23,17 +23,12 @@ public abstract class Block {
 
 		// Validate column lengths (set Height)
 		foreach (bool[] column in grid) {
-			if (column.Length > 0) {
-				// Good
-				if (Height == -1) Height = column.Length;
 
-				// Row length mismatch
-				if (Height != column.Length)
-					throw new ArgumentException($"All column lengths must match. Found a column with length {column.Length}, deviating from the previous length {Height}.");
+			// First column sets height.
+			if (column.Length > 0 && Height == -1) Height = column.Length;
 
-				// Good
-				continue;
-			}
+			// Update height if current column is taller.
+			//else if (column.Length > Height) Height = column.Length;
 
 			// Column length 0.
 			else if (column.Length == 0) throw new ArgumentException("All column lengths must not be 0.");
