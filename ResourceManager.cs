@@ -90,8 +90,9 @@ internal static class ResourceManager {
 		Raylib.UpdateMusicStream(MusicStream);
 		if (Raylib.IsMusicStreamPlaying(MusicStream)) return;
 
-		Log.Me(() => "Finding tetoris...", v, s + 1);
-		string filePath = $"Assets\\Audio\\tetoris.wav";
+		Log.Me(() => "Finding background music to play...", v, s + 1);
+		int musicIndex = Raylib.GetRandomValue(0, 4);
+		string filePath = $"Assets\\Audio\\music{musicIndex}.wav";
 		string fileName = Path.GetFileNameWithoutExtension(filePath);
 		MusicStream = Raylib.LoadMusicStream(filePath);
 
