@@ -2,6 +2,9 @@
 ## How to Play
 > NotQuiteTetris is a simple minigame identical in concept to Block Blast.
 
+![Game](https://github.com/user-attachments/assets/d608a9b6-7d1d-4efc-88c0-b8dbf0b57c11)
+
+
 You start with an empty 8x8 grid and 4 blocks in your hand.
 Each block is made up of 1 to 4 squares.
 
@@ -18,12 +21,19 @@ or when you reach 5000 points.
 ### Start
 You start with an empty 8x8 grid and 4 blocks in your hand.
 
+![Start](https://github.com/user-attachments/assets/fcc4a56d-6486-4617-8b7d-0d14a0d68645)
+
+
 ### Win
 You win by reaching 5000 points.
+
+![Win](https://github.com/user-attachments/assets/7bc7f120-77f1-4228-ba10-7c06e31ad0ca)
+
 
 ### Lose
 You lose when you can't place any of the blocks in your hand.
 
+![Lose](https://github.com/user-attachments/assets/22d524c9-1f59-4307-b7c7-a9183fca081d)
 
 
 ## Controls
