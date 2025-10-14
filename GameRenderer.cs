@@ -141,6 +141,9 @@ public static class GameRenderer {
 			int textX = (ResolutionX - textWidth) / 2;
 			int textY = (ResolutionY - fontSize) / 2;
 			Raylib.DrawText(gameOverText, textX, textY, fontSize, ColorPalette["Text"]);
+
+			if (won) ResourceManager.PlaySound("end_win", v, s + 1);
+			else ResourceManager.PlaySound("end_lose", v, s + 1);
 		}
 
 		Raylib.EndDrawing();

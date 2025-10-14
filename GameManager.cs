@@ -12,6 +12,8 @@ public static class GameManager {
 	public static void InitializeHand(bool v = false, int s = 0) {
 		Log.Me(() => "Initializing hand...", v, s + 1);
 
+		ResourceManager.PlaySound("reset_hand", v, s + 1);
+
 		for (int i = 0; i < Hand.Length; i++) {
 			Log.Me(() => $"Filling hand at index {i}...", v, s + 1);
 			Hand[i] = GetRandomBlock(v, s + 1);
@@ -69,12 +71,14 @@ public static class GameManager {
 		// Has space
 		if (toPlace) {
 			Log.Me(() => $"Placing block at ({gridX}, {gridY}).", v, s + 1);
+			ResourceManager.PlaySound("put_success", v, s + 1);
 			GridManager.PlaceBlock(block, gridX, gridY, v, s + 1);
 		}
 
 		// No space
 		else {
 			Log.Me(() => $"Unable to place block at ({gridX}, {gridY}).", v, s + 1);
+			ResourceManager.PlaySound("put_fail", v, s + 1);
 			return;
 		}
 
@@ -275,6 +279,7 @@ public static class GameManager {
 		Log.Me(() => "Done!", v, s + 1);
 		return true;
 	}
+
 
 	public static bool IsMouseInGrid(bool v = false, int s = 0) {
 		Log.Me(() => "Checking if mouse is inside grid...", v, s + 1);

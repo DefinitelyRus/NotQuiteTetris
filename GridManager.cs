@@ -227,6 +227,8 @@ public static class GridManager {
 			}
 		}
 
+		if (clearedLines > 0) ResourceManager.PlaySound("line_clear", v, s + 1);
+
 		Log.Me(() => $"Done! Cleared {clearedLines} lines.", v, s + 1);
 		return clearedLines;
 	}
