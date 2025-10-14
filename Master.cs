@@ -7,18 +7,13 @@ public class Master
 
     public const bool LogUpdate = true;
 
+	private static bool IsOnMainMenu = true;
+
 	static void Main() {
 		Log.Me(() => "Starting game...", LogBasic);
 		Raylib.SetTraceLogLevel(TraceLogLevel.Warning);
-		Raylib.SetTargetFPS(120);
-
-		Log.Me(() => "Doing initial setup...", LogBasic);
-		ResourceManager.Initialize(LogBasic);
 		GameRenderer.Initialize(LogBasic);
-		GameManager.InitializeHand(LogBasic);
-
-		Log.Me(() => "Loading game from file...", LogBasic);
-		GameManager.LoadGameProgress(LogBasic);
+		ResourceManager.Initialize(LogBasic);
 
 		Log.Me(() => "Entering main game loop...", LogBasic);
 		while (!Raylib.WindowShouldClose()) {
@@ -26,10 +21,27 @@ public class Master
 			Raylib.BeginDrawing();
 			Raylib.ClearBackground(Color.RayWhite);
 
-			InputManager.Update(LogUpdate);
-			GameRenderer.Update(LogUpdate);
+			if (!IsOnMainMenu) {
+				InputManager.Update(LogUpdate);
+				GameRenderer.Update(LogUpdate);
 
-			ResourceManager.PlayMusic(LogUpdate);
+				ResourceManager.PlayMusic(LogUpdate);
+			}
+			else {
+				Log.Me(() => "Rendering main menu...", LogUpdate);
+
+				Raylib.DrawText("Not Quite Tetris", 50, 100, 50, Color.DarkBlue);
+				Raylib.DrawText("Press ENTER to start", 70, 200, 20, Color.DarkGray);
+
+				if (Raylib.IsKeyPressed(KeyboardKey.Enter)) {
+					Log.Me(() => "Starting game...", LogBasic);
+					IsOnMainMenu = false;
+					GameManager.InitializeHand(LogBasic);
+					GameManager.LoadGameProgress(LogBasic);
+				}
+
+				Raylib.EndDrawing();
+			}
 
 			Log.Me(() => "Frame complete.\n", LogUpdate);
 		}
